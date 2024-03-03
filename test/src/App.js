@@ -11,7 +11,7 @@ const App = () => {
     fetchData()
   },[])
   const fetchData=async()=>{
-    const response=await fetch("http://localhost:5000/sushma");
+    const response=await fetch("http://localhost:5000/");
     if(response.ok){
       const data=await response.json();
       console.log(data);
@@ -22,15 +22,15 @@ const App = () => {
 
   // for sort date and time 
   const sortByDate = () => {
-    const sorted = [...users].sort((a, b) => new Date(b.createdat) - new Date(a.createdat));
+    const sorted = [...users].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     setUsers(sorted);
   };
 
   // Sort by times in descending order
   const sortByTime = () => {
     const sorted = [...users].sort((a, b) => {
-      const [, timeA] = a.createdat.split('T');
-      const [, timeB] = b.createdat.split('T');
+      const [, timeA] = a.created_at.split('T');
+      const [, timeB] = b.created_at.split('T');
       return timeB.localeCompare(timeA);
     });
     setUsers(sorted);
@@ -128,10 +128,10 @@ const App = () => {
           return store.toLowerCase()===''
           ? item
           
-          :item.customername.toLowerCase().includes(store);
+          :item.customer_name.toLowerCase().includes(store);
         })
           .map((each,index)=>{
-          const [date, time]=each.createdat.split('T');
+          const [date, time]=each.created_at.split('T');
           const [time1,time2]=time.split('.');
           return <tr key={index} style={{}}>
              <td >{each.sno}</td>
@@ -140,7 +140,7 @@ const App = () => {
             <td >{each.phone}</td>
             <td >{each.location}</td>
             <td >{date}</td>
-            <td >{time}</td>
+            <td >{time1}</td>
             </tr>
         })
       }

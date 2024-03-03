@@ -28,7 +28,7 @@ app.use(express.json());
 // })
 
 //get all records
-app.get("/sushma",async(req,res)=>{
+app.get("/",async(req,res)=>{
     try{
         const allTodos=await pool.query("SELECT * FROM Details");
         res.status(200).json(allTodos.rows);
